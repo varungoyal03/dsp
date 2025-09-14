@@ -1,0 +1,30 @@
+clc; clear; close all;
+
+% User input
+f = input('Enter frequency of square wave (Hz): ');
+duty = input('Enter duty cycle of square wave (0-100): ');
+
+% Time axis
+Fs = 1000;              % Sampling frequency
+t = 0:1/Fs:1;           % 1 second duration
+
+% Continuous square wave
+sq_cont = square(2*pi*f*t, duty);
+
+% Discrete version (sampled points)
+n = 0:20;
+sq_disc = square(2*pi*f*n/Fs, duty);
+
+% Plot
+figure;
+subplot(2,1,1);
+plot(t, sq_cont, 'b','LineWidth',1.5); grid on;
+title(sprintf('Continuous Square Wave: f=%dHz, duty=%d%%', f, duty));
+xlabel('Time (s)'); ylabel('Amplitude');
+
+subplot(2,1,2);
+stem(n/Fs, sq_disc, 'r','LineWidth',1.5); grid on;
+title('Discrete Square Wave');
+xlabel('Time (s)'); ylabel('Amplitude');
+
+sgtitle('Experiment 1(b) - Varun, Roll No: 102315115');
